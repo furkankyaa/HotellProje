@@ -1,3 +1,9 @@
 Api Testi ve Swagger
 Temayý ekleyelim 
 Register - Login 
+
+
+ONAY BEKLÝYOR
+ONAYLANDI
+ÝPTAL EDÝLDÝ
+BEKLETÝLÝYOR
