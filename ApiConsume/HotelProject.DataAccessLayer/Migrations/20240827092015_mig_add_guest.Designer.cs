@@ -4,14 +4,16 @@ using HotelProject.DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HotelProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20240827092015_mig_add_guest")]
+    partial class mig_add_guest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,8 @@ namespace HotelProject.DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Content")
+                        .HasColumnType("int");
 
                     b.Property<int>("CustomerCount")
                         .HasColumnType("int");
@@ -38,11 +40,11 @@ namespace HotelProject.DataAccessLayer.Migrations
                     b.Property<int>("StaffCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Title1")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Title1")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Title2")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Title2")
+                        .HasColumnType("int");
 
                     b.HasKey("AboutID");
 
@@ -194,33 +196,6 @@ namespace HotelProject.DataAccessLayer.Migrations
                     b.HasKey("BookingID");
 
                     b.ToTable("Booking");
-                });
-
-            modelBuilder.Entity("HotelProject.EntityLayer.Concrete.Contact", b =>
-                {
-                    b.Property<int>("ContactID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Mail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Subject")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ContactID");
-
-                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("HotelProject.EntityLayer.Concrete.Guest", b =>

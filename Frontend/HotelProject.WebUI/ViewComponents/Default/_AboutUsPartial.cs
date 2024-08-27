@@ -5,6 +5,12 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Linq;
+using Newtonsoft.Json.Linq;
+using System;
+using HotelProject.WebUI.Dtos.AboutDto;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace HotelProject.WebUI.ViewComponents.Default
 {
@@ -28,6 +34,7 @@ namespace HotelProject.WebUI.ViewComponents.Default
                 return View(values);
             }
             return View();
+
         }
     }
 }
