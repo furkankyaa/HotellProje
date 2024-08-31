@@ -24,6 +24,8 @@ namespace HotelProject.WebUI.Controllers
         {
             var client = _httpClientFactory.CreateClient();   //istemci oluşturduk
             var responseMessage = await client.GetAsync("http://localhost:5453/api/Staff"); //ilgili adrese istekte bulunduk
+            if (responseMessage.IsSuccessStatusCode)
+
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();   //gelen veriyi jsondataya atadık
                 var values = JsonConvert.DeserializeObject<List<StaffViwModel>>(jsonData); //tabloda gösterbilecek formata dönüştürdük
