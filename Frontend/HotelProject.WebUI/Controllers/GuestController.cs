@@ -40,16 +40,22 @@ namespace HotelProject.WebUI.Controllers
         [HttpPost]
         public async Task<ActionResult> AddGuest(CreateGuestDto createGuestDto)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(createGuestDto);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("http://localhost:5453/api/Guest", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                var client = _httpClientFactory.CreateClient();
+                var jsonData = JsonConvert.SerializeObject(createGuestDto);
+                StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                var responseMessage = await client.PostAsync("http://localhost:5453/api/Guest", stringContent);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View();
             }
-            return View();
-
+            else
+            {
+                return View();
+            }
         }
         public async Task<IActionResult> DeleteGuest(int id)
         {
@@ -64,47 +70,36 @@ namespace HotelProject.WebUI.Controllers
         }
         [HttpGet]
 
-        public async Task<ActionResult> UpdateGuest(UpdateGuestDto updateGuestDto)
+        public async Task<IActionResult> UpdateGuest(int id)
         {
             var client = _httpClientFactory.CreateClient();
-
-            // Doğru GuestID ile istek URL'sini oluşturun
-            var responseMessage = await client.GetAsync($"http://localhost:5453/api/Guest?id={updateGuestDto.GuestID}");
-
+            var responseMessage = await client.GetAsync($"http://localhost:5453/api/Guest/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-
-                // Yanıtı tek bir UpdateGuestDto nesnesine deserialize edin
-                var guest = JsonConvert.DeserializeObject<UpdateGuestDto>(jsonData);
-
-                // guest nesnesini view'a geri döndürün
-                return View(guest);
+                var values = JsonConvert.DeserializeObject<UpdateGuestDto>(jsonData);
+                return View(values);
             }
-
-            // Yanıt başarılı değilse, boş bir view veya hata view'ı döndürün
             return View();
         }
 
-
-
         [HttpPost]
-     
-
-
-        [HttpPost]
-        public async Task<ActionResult> UpdateStaff(UpdateStaffViewModel model)
+        public async Task<IActionResult> UpdateGuest(UpdateGuestDto updateGuestDto)
         {
-            var client = _httpClientFactory.CreateClient();
-            var jsonData = JsonConvert.SerializeObject(model);
-            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("http://localhost:5453/api/Staff/", stringContent);
-            if (responseMessage.IsSuccessStatusCode)
+            if (ModelState.IsValid)
             {
-
-                return RedirectToAction("Index");
+                var client = _httpClientFactory.CreateClient();
+                var jsonData = JsonConvert.SerializeObject(updateGuestDto);
+                StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+                var responseMessage = await client.PutAsync("http://localhost:5453/api/Guest/", stringContent);
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View();
             }
             return View();
         }
     }
 }
+
