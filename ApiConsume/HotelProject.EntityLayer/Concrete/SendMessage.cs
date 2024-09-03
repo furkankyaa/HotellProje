@@ -13,8 +13,9 @@ namespace HotelProject.EntityLayer.Concrete
         public string ReceiverMail { get; set; }
         public string SenderName { get; set; }
         public string SenderMail { get; set; }
-        public string Content { get; set; }
         public int Title { get; set; }
+
+        public string Content { get; set; }
         public DateTime Date { get; set; }
     }
 }
