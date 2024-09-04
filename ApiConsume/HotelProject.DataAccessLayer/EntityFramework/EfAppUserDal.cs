@@ -2,6 +2,7 @@
 using HotelProject.DataAccessLayer.Concrete;
 using HotelProject.DataAccessLayer.Repositories;
 using HotelProject.EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +11,14 @@ using System.Threading.Tasks;
 
 namespace HotelProject.DataAccessLayer.EntityFramework
 {
-    public  class EfSendMessageDal : GenericRepository<SendMessage>, ISendMessageDal
+    public class EfAppUserDal :GenericRepository<AppUser>, IAppUserDal
     {
-         public EfSendMessageDal(Context context) : base(context)
-    {
+        public EfAppUserDal(Context context) : base(context) { }
 
-    }
-
-        public int GetSendMessageCount()
+        public List<AppUser> UserListWithLocation()
         {
-            var context = new Context();
-            return context.SendMessages.Count();
+            var context=new Context();  
+            return context.Users.Include(x=>x.WorkLocation).ToList();
         }
     }
 }

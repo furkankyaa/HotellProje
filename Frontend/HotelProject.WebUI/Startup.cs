@@ -36,21 +36,22 @@ namespace HotelProject.WebUI
             services.AddTransient<IValidator<UpdateGuestDto>, UpdateGuestValidator>();
             services.AddControllersWithViews().AddFluentValidation();
             services.AddAutoMapper(typeof(Startup));
-            services.AddMvc(config => {
 
-            var policy= new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-                config.Filters.Add(new AuthorizeFilter(policy));
+            //services.AddMvc(config => {
+
+            //var policy= new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            //    config.Filters.Add(new AuthorizeFilter(policy));
 
             
-            }) ;
+            //}) ;
 
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-                options.LoginPath = "/Login/Index/";
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    options.Cookie.HttpOnly = true;
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+            //    options.LoginPath = "/Login/Index/";
 
-            });
+            //});
 
         }
 

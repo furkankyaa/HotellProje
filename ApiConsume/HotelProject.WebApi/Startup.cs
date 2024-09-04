@@ -34,7 +34,7 @@ namespace HotelProject.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddDbContext<Context>();
             services.AddScoped<IStaffDal, EfStaffDal>();
             services.AddScoped<IStaffService, StaffManager>();
@@ -60,7 +60,7 @@ namespace HotelProject.WebApi
             services.AddScoped<IContactDal, EfContactDal>();
             services.AddScoped<IContactService, ContactManager>();
 
-            services.AddScoped<IGuestDal,EfGuestDal >();
+            services.AddScoped<IGuestDal, EfGuestDal>();
             services.AddScoped<IGuestService, GuestManager>();
 
             services.AddScoped<ISendMessageDal, EfSendMessageDal>();
@@ -68,6 +68,12 @@ namespace HotelProject.WebApi
 
             services.AddScoped<IMessageCategoryDal, EfMessageCategoryDal>();
             services.AddScoped<IMessageCategoryService, MessageCategoryManager>();
+
+            services.AddScoped<IWorkLocationDal, EfWorkLocationDal>();
+            services.AddScoped<IWorkLocationService, WorkLocationManager>();
+
+            services.AddScoped<IAppUserDal, EfAppUserDal>();
+            services.AddScoped<IAppUserService, AppUserManager>();
 
 
 
@@ -86,10 +92,9 @@ namespace HotelProject.WebApi
 
             });
 
-            
 
-
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HotelProject.WebApi", Version = "v1" });
