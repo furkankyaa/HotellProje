@@ -52,5 +52,15 @@ namespace HotelProject.BusinessLayer.Concrete
         {
             _bookingDal.BookingStatusChangeApproved2(id);
         }
+
+        public int TGetBookingCount()
+        {
+          return _bookingDal.GetBookingCount();
+        }
+
+        public List<Booking> TLast6Bookings()
+        {
+            return _bookingDal.Last6Bookings();
+        }
     }
 }

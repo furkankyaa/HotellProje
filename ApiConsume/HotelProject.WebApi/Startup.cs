@@ -77,6 +77,8 @@ namespace HotelProject.WebApi
 
 
 
+
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddCors(opt =>
