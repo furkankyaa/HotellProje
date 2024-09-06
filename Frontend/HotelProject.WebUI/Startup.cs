@@ -37,21 +37,22 @@ namespace HotelProject.WebUI
             services.AddControllersWithViews().AddFluentValidation();
             services.AddAutoMapper(typeof(Startup));
 
-            //services.AddMvc(config => {
+            services.AddMvc(config =>
+            {
 
-            //var policy= new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-            //    config.Filters.Add(new AuthorizeFilter(policy));
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
 
-            
-            //}) ;
 
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    options.Cookie.HttpOnly = true;
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-            //    options.LoginPath = "/Login/Index/";
+            });
 
-            //});
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                options.LoginPath = "/Login/Index/";
+
+            });
 
         }
 
