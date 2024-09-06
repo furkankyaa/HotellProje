@@ -7,22 +7,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Markup;
 
 namespace HotelProject.DataAccessLayer.EntityFramework
 {
     public class EfBookingDal : GenericRepository<Booking>, IBookingDal
     {
         public EfBookingDal(Context context) : base(context)
-
         {
 
         }
 
         public void BookingStatusChangeApproved(Booking booking)
         {
-             var context = new Context();
-           var values= context.Booking.Where(x => x.BookingID == booking.BookingID).FirstOrDefault();
+            var context = new Context();
+            var values = context.Booking.Where(x => x.BookingID == booking.BookingID).FirstOrDefault();
             values.Status = "Onaylandı";
             context.SaveChanges();
         }
@@ -35,16 +33,40 @@ namespace HotelProject.DataAccessLayer.EntityFramework
             context.SaveChanges();
         }
 
+        public void BookingStatusChangeApproved3(int id)
+        {
+            var context = new Context();
+            var values = context.Booking.Find(id);
+            values.Status = "Onaylandı";
+            context.SaveChanges();
+        }
+
+        public void BookingStatusChangeCancel(int id)
+        {
+            var context = new Context();
+            var values = context.Booking.Find(id);
+            values.Status = "İptal Edildi";
+            context.SaveChanges();
+        }
+
+        public void BookingStatusChangeWait(int id)
+        {
+            var context = new Context();
+            var values = context.Booking.Find(id);
+            values.Status = "Müşteri Aranacak";
+            context.SaveChanges();
+        }
+
         public int GetBookingCount()
         {
-            var context =new Context();
-            var value =context.Booking.Count(); 
+            var context = new Context();
+            var value = context.Booking.Count();
             return value;
         }
 
         public List<Booking> Last6Bookings()
         {
-            var context =new Context();
+            var context = new Context();
             var values = context.Booking.OrderByDescending(x => x.BookingID).Take(6).ToList();
             return values;
         }

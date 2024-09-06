@@ -4305,6 +4305,7 @@
 
   <ItemGroup>
     <Folder Include="ValidationRules\RoomValidationRules\" />
+    <Folder Include="Views\Setting\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
