@@ -1,6 +1,6 @@
 Veri tabanı olarak MSSQL kullandığımız projemizde backend kısmı tamamıyla Api ile kodlandı. Frontend kısmında ise api yapısı mvc controller ile consume edildi yani tüketildi.
 
-Bu kursta neler var;
+Bu projede neler var;
 
 * Asp.Net Core Api
 
